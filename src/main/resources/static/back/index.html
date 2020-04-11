@@ -9,13 +9,21 @@
 
 $.when( $.ready ).then(function (){
 	var btn = $("#btn").click(()=>{
-			$.getJSON("/profiles",
-					{
-						id:2
+			$.ajax("/profiles",{
+					data :{
+							id:2,
+							//password: 'mima'
+						},
+					success: (data,status)=>{
+						console.log(status)
+						$("#p").text(JSON.stringify(data))
 					},
-				(data,status)=>{
-					console.log(status)
-					$("#p").text(JSON.stringify(data))
+					error : (jqXHR, textStatus, errorThrown) =>{
+						console.log(jqXHR)
+						$("#p").text(jqXHR.responseText)
+
+						} 
+				
 				})
 		})
 })
